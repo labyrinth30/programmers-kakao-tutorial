@@ -1,0 +1,13 @@
+# 의존성 모듈 (모든 폴더의 node_modules 무시)
+**/node_modules
+
+# 환경변수 (절대 올리면 안 됨!)
+**/.env
+**/.env.*
+
+# 빌드 결과물
+**/dist
+**/build
+
+# OS 시스템 파일
+.DS_Store
