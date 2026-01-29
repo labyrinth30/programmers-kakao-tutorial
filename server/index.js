@@ -45,6 +45,7 @@ app.post('/login/kakao', async (req, res) => {
             }
         );
         const kakaoAccessToken = tokenResponse.data.access_token;
+        console.log(`카카오 서버에서 전달받은 카카오 엑세스 토큰: ${kakaoAccessToken}`);
 
         // 2. 카카오 유저 정보 조회 (기존 동일)
         const userResponse = await axios.get('https://kapi.kakao.com/v2/user/me', {
@@ -52,6 +53,7 @@ app.post('/login/kakao', async (req, res) => {
         });
 
         const kakaoUser = userResponse.data;
+        console.log(`카카오 서버에서 전달받은 유저의 데이터: ${JSON.stringify(kakaoUser)}`)
         const kakaoId = String(kakaoUser.id); // 카카오 고유 ID (숫자인데 문자열로 저장 추천)
         const email = kakaoUser.kakao_account?.email || null;
         const nickname = kakaoUser.properties?.nickname || kakaoUser.kakao_account?.profile?.nickname || 'Unknown';
