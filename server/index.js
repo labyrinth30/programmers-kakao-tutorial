@@ -2,11 +2,13 @@ const express = require('express');
 const cors = require('cors');
 const cookieParser = require('cookie-parser');
 const axios = require('axios');
+require('dotenv').config();
 const pool = require('./db');
 const jwt = require('jsonwebtoken');
+const redis = require('./redis');
 
 console.log(process.env.KAKAO_CLIENT_ID);
-require('dotenv').config();
+
 
 const app = express();
 
@@ -22,6 +24,7 @@ app.use(cors({
 
 app.listen(3001, () => console.log('Server running on 3001'));
 
+app.get('/', (req, res) => res.send('Hello World!'));
 // server/app.js
 
 app.post('/login/kakao', async (req, res) => {

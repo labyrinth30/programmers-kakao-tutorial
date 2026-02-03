@@ -1,8 +1,37 @@
 services:
+  express:
+    build:
+      # Dockerfile이 있는 경로를 지정해줬음
+      context: ./server
+      dockerfile: Dockerfile
+    container_name: my-express-server
+    ports:
+      - "3001:3001"
+    environment:
+      DB_PORT: 3306
+      DB_HOST: mysql
+      DB_USER: user # localhost X
+      DB_PASSWORD: root
+      DB_NAME: mydb
+      REDIS_HOST: redis
+      REDIS_PORT: 6379
+    volumes:
+      - ./server:/app
+      - /app/node_modules
+    depends_on:
+      mysql:                # DB가 먼저 켜져야 앱 실행
+        condition: service_healthy
+      redis:
+        condition: service_started
+
   mysql:
     image: mysql:8
     container_name: mysql_server
     restart: always
+    healthcheck:
+      test: [ "CMD", "mysqladmin", "ping"]
+      interval: 5s
+      retries: 5
     ports:
       - "3306:3306"
     environment:
@@ -12,3 +41,21 @@ services:
       MYSQL_PASSWORD: root
     volumes:
       - ./mysql_data:/var/lib/mysql
+
+  redis:
+    image: redis:alpine
+    container_name: redis_server
+    ports:
+      - "6379:6379"
+  client:
+    build:
+      context: ./client
+      dockerfile: Dockerfile
+    container_name: my-vite-client
+    ports:
+      - "5173:5173"
+    volumes:
+      - ./client:/app
+      - /app/node_modules
+    depends_on:
+      - express

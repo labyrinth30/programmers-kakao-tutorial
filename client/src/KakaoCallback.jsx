@@ -13,7 +13,7 @@ const KakaoCallback = () => {
         const login = async () => {
             try {
                 const response = await axios.post(
-                    'http://localhost:3001/login/kakao',
+                    `${import.meta.env.VITE_API_URL}/login/kakao`, // localhost:3001
                     { code },
                     { withCredentials: true }
                 );
