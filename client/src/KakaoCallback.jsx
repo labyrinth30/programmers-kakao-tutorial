@@ -26,7 +26,7 @@ const KakaoCallback = () => {
             } catch (error) {
                 console.error('로그인 에러:', error);
 
-                // (선택사항) 이미 코드를 써서 나는 400 에러 말고, 진짜 서버 에러일 때만 알림
+                // 이미 code를 써서 나는 400 에러 말고, 진짜 서버 에러일 때만 알림
                 if (error.response?.status !== 400) {
                     alert('로그인에 실패했습니다.');
                     navigate('/');

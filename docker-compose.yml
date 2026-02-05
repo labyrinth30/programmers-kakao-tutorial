@@ -9,8 +9,8 @@ services:
       - "3001:3001"
     environment:
       DB_PORT: 3306
-      DB_HOST: mysql
-      DB_USER: user # localhost X
+      DB_HOST: mysql # localhost X
+      DB_USER: user
       DB_PASSWORD: root
       DB_NAME: mydb
       REDIS_HOST: redis

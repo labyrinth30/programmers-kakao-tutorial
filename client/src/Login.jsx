@@ -10,7 +10,7 @@ const Login = () => {
     const KAKAO_AUTH_URL = `https://kauth.kakao.com/oauth/authorize?client_id=${REST_API_KEY}&redirect_uri=${REDIRECT_URI}&response_type=code`;
 
     const handleLogin = () => {
-        // 페이지를 카카오 인증 서버로 이동시킵니다.
+        // 유저를 카카오 인증 서버로 이동
         window.location.href = KAKAO_AUTH_URL;
     };
 
@@ -18,8 +18,6 @@ const Login = () => {
         <div style={{ textAlign: 'center', marginTop: '50px' }}>
             <h1>React + Express 로그인 실습</h1>
             <p>로그인 버튼을 누르면 카카오로 이동합니다.</p>
-
-            {/* 버튼 클릭 시 이동 */}
             <button
                 onClick={handleLogin}
                 style={{
